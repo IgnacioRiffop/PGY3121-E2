@@ -1,3 +1,5 @@
+{% load static%}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{% static 'core/css/style.css'%}">
   <title>Home</title>
 </head>
 
@@ -71,7 +73,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <img src="img/collarblanco.jpg" class="responsive" width="100%" height="225">
+            <img src="{% static 'core/img/collarblanco.jpg' %}" class="responsive" width="100%" height="225">
 
             <div class="card-body">
               <p class="card-text">Collar para Perro Martingale WhiteOwl</p>
@@ -87,7 +89,7 @@
         </div>
         <div class="col">
             <div class="card shadow-sm">
-              <img src="img/arnesverdedog.jpg" class="responsive" width="100%" height="225">
+              <img src="{% static 'core/img/arnesverdedog.jpg' %}" class="responsive" width="100%" height="225">
   
               <div class="card-body">
                 <p class="card-text">Arnes H Hawkins Stranger Things para Perro</p>
@@ -103,7 +105,7 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <img src="img/collarnegrocat.png" class="responsive" width="100%" height="225">
+            <img src="{% static 'core/img/collarnegrocat.png' %}" class="responsive" width="100%" height="225">
             <div class="card-body">
               <p class="card-text">Gotham Collar Gato</p>
               <p class="card-text fw-bold">$13.100</p>
