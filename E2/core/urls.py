@@ -15,4 +15,5 @@ urlpatterns = [
     path('suscripcionAdmin/', suscripcionAdmin, name="suscripcionAdmin"),
     path('voucher/', voucher, name="voucher"),
     path('recuperarPass/', recuperarPass, name="recuperarPass"),
+    path('base/', base, name="base"),
 ]

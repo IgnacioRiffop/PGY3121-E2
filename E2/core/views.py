@@ -40,3 +40,6 @@ def voucher(request):
 def recuperarPass(request):
     return render(request, ('core/recuperarPass.html'))
 
+def base(request):
+    return render(request, ('core/base.html'))
+

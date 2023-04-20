@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static%}
+
+<!-- INICIO CONTENIDO-->
+{% block contenido %}
+
+{% endblock %}
+<!-- FIN CONTENIDO -->
+   
+   
+    <!-- Registro -->
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100" style="background-color: rgb(207, 207, 207)">
+      <div class="bg-white p-5 rounded-5 text-dark shadow" style="width: 25rem">
+
+          <form action="registroAnuncio.html" method="get">
+              <div class="text-center fs-1 fw-bold">Regístrate</div>
+              <div class="input-group mt-3">
+                  <input class="form-control bg-light" name="nombre" type="text" placeholder="Nombre y apellido" />
+              </div>
+              <div class="input-group mt-2">
+                  <input class="form-control bg-light" name="email" type="text" placeholder="Email" />
+              </div>
+              <div class="input-group mt-2">
+                  <input class="form-control bg-light" name="pass" type="password" placeholder="Contraseña" />
+              </div>
+              <div class="input-group mt-2">
+                  <input class="form-control bg-light" name="pass2" type="password" placeholder="Repetir contraseña" />
+              </div>
+
+              <input type="submit" value="Regístrate" class="btn btn-verde my-1 w-100 mt-3 fw-semibold shadow-sm">
+          </form>
+
+          <div class="d-flex gap-1 justify-content-center mt-1">
+              <div>¿Ya tienes una cuenta?</div>
+              <a href="login.html" class="text-decoration-none fw-semibold ltr-verde">Inicia Sesíon</a>
+          </div>
+      </div>
+  </div>
+  <!-- Fin Registro -->
