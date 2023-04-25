@@ -4,6 +4,9 @@ from.views import *
 ## SE VAN A CREAR TODAS LAS URLS
 urlpatterns = [
     path('', index, name="index"),
+    path('indexSesion', indexSesion, name="indexSesion"),
+    path('tiendaSesion', tiendaSesion, name="tiendaSesion"),
+    path('productoSesion', productoSesion, name="productoSesion"),
     path('carrito/', carrito, name="carrito"),
     path('compra/', compra, name="compra"),
     path('cuenta/', cuenta, name="cuenta"),

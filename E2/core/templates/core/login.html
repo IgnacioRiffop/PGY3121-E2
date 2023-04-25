@@ -10,7 +10,7 @@
         <div class="d-flex justify-content-center">
             <img src="{% static 'core/img/dog_light_icon.png' %}" alt="login-icon" style="height: 7rem" />
         </div>
-        <form action="indexSesion.html" method="get">
+        <form action="{% url 'indexSesion' %}" method="get">
             <div class="text-center fs-1 fw-bold">Bienvenid@</div>
             <div class="input-group mt-4">
                 <div class="input-group-text" style="background-color: green">
@@ -26,7 +26,8 @@
             </div>
             <div class="d-flex justify-content-around mt-1">
                 <div class="pt-1">
-                    <a href="recuperarPass.html" class="text-decoration-none fw-semibold fst-italic ltr-verde">Olvidaste
+
+                    <a href="{% url 'recuperarPass' %}" class="text-decoration-none fw-semibold fst-italic ltr-verde">Olvidaste
                         tu contraseña?</a>
                 </div>
             </div>
@@ -34,7 +35,7 @@
         </form>
         <div class="d-flex gap-1 justify-content-center mt-1">
             <div>¿No tienes una cuenta?</div>
-            <a href="registro.html" class="text-decoration-none fw-semibold ltr-verde">Regístrate</a>
+            <a href="{% url 'registro' %}" class="text-decoration-none fw-semibold ltr-verde">Regístrate</a>
         </div>
     </div>
 </div>

@@ -7,6 +7,9 @@ from django.shortcuts import render
 def index(request):
     return render(request, ('core/index.html'))
 
+def indexSesion(request):
+    return render(request, ('core/indexSesion.html'))
+
 def carrito(request):
     return render(request, ('core/carrito.html'))
 
@@ -19,6 +22,9 @@ def cuenta(request):
 def tienda(request):
     return render(request, ('core/tienda.html'))
 
+def tiendaSesion(request):
+    return render(request, ('core/tiendaSesion.html'))
+
 def login(request):
     return render(request, ('core/login.html'))
 
@@ -27,6 +33,9 @@ def registro(request):
 
 def producto(request):
     return render(request, ('core/producto.html'))
+
+def productoSesion(request):
+    return render(request, ('core/productoSesion.html'))
 
 def suscripcion(request):
     return render(request, ('core/suscripcion.html'))
