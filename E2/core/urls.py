@@ -5,6 +5,9 @@ from.views import *
 urlpatterns = [
     path('', index, name="index"),
     path('indexSesion', indexSesion, name="indexSesion"),
+    path('addProducto', addProducto, name="addProducto"),
+    path('updateProducto/<id>/', updateProducto, name="updateProducto"),
+    path('deleteProducto/<id>/', deleteProducto, name="deleteProducto"),
     path('tiendaSesion', tiendaSesion, name="tiendaSesion"),
     path('productoSesion', productoSesion, name="productoSesion"),
     path('carrito/', carrito, name="carrito"),

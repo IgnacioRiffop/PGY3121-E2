@@ -1,14 +1,54 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from .models import *
+from .forms import *
 # Create your views here.
 
 ## VIEWS - URLS - HTML
 
 def index(request):
-    return render(request, ('core/index.html'))
+    productosAll = Producto.objects.all() # SELECT * FROM producto
+    data = {
+        'listaProductos' : productosAll
+    }
+    return render(request, 'core/index.html', data)
 
 def indexSesion(request):
     return render(request, ('core/indexSesion.html'))
+
+# CRUD PRODUCTO
+def addProducto(request):
+    data = {
+        'form' : ProductoForm()
+    }
+    
+    if request.method == 'POST':
+        formulario = ProductoForm(request.POST) # OBTIENE LA DATA DEL FORMULARIO
+        if formulario.is_valid():
+            formulario.save() 
+            data['msj'] = "Producto guardado correctamente"
+
+    return render(request, 'core/addProducto.html', data)
+
+def updateProducto(request, id):
+    producto = Producto.objects.get(id=id) #OBTIENE UN PRODUCTO POR EL ID
+    data = {
+        'form' : ProductoForm(instance=producto) # CARGAMOS EL PRODUCTO EN EL FORM
+    }
+    
+    if request.method == 'POST':
+        formulario = ProductoForm(request.POST, instance=producto) # OBTIENE LA DATA DEL FORMULARIO
+        if formulario.is_valid():
+            formulario.save() 
+            data['msj'] = "Producto actualizado correctamente"
+            data['form'] = formulario #CARGA LA NUEVA INFO EN EL FORM
+            
+    return render(request, 'core/updateProducto.html', data)
+
+def deleteProducto(request, id):
+    producto = Producto.objects.get(id=id)
+    producto.delete()
+    return redirect(to='index')
+# FIN CRUD PRODUCTO
 
 def carrito(request):
     return render(request, ('core/carrito.html'))

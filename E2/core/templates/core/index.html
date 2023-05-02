@@ -1,6 +1,10 @@
 {% extends 'core/base.html' %}
 {% load static%}
 
+{% block css %}
+  
+{% endblock %}
+
 <!-- INICIO CONTENIDO-->
 {% block contenido %}
 
@@ -35,55 +39,33 @@
 <!-- Tienda -->
 <div class="album py-1 bg-light">
   <div class="container">
-
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="{% static 'core/img/collarblanco.jpg' %}" class="responsive" width="100%" height="225">
-
-          <div class="card-body">
-            <p class="card-text">Collar para Perro Martingale WhiteOwl</p>
-            <p class="card-text fw-bold">$30.250</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="{% url 'producto' %}" class="btn btn-verde">Ver Más</a>
+      
+      {% for prod in listaProductos %}
+        {% if prod.stock > 0 %}
+          <div class="col">
+            <div class="card shadow-sm">
+              {% if prod.imagen %}
+              <img src="{% static 'core/img/collarblanco.jpg' %}" class="responsive" width="100%" height="225">
+              {% else %}
+              <img src="{% static 'core/img/dog_light_icon.png' %}" class="responsive" width="100%" height="225">
+              {% endif %}
+              <div class="card-body">
+                <p class="card-text">{{ prod.nombre }}</p>
+                <p class="card-text fw-bold">${{ prod.precio }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="{% url 'producto' %}" class="btn btn-verde">Ver Más</a>
+                    <a href="{% url 'updateProducto' prod.id %}" class="btn btn-verde">Modificar</a>
+                    <a href="{% url 'deleteProducto' prod.id %}" class="btn btn-verde">Eliminar</a>
+                  </div>
+                  <small class="text-muted">Stock: {{ prod.stock }}</small>
+                </div>
               </div>
-              <small class="text-muted">Stock: 6</small>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="{% static 'core/img/arnesverdedog.jpg' %}" class="responsive" width="100%" height="225">
-
-          <div class="card-body">
-            <p class="card-text">Arnes H Hawkins Stranger Things para Perro</p>
-            <p class="card-text fw-bold">$12.900</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="#" class="btn btn-verde">Ver Más</a>
-              </div>
-              <small class="text-muted">Stock: 2</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="{% static 'core/img/collarnegrocat.png' %}" class="responsive" width="100%" height="225">
-          <div class="card-body">
-            <p class="card-text">Gotham Collar Gato</p>
-            <p class="card-text fw-bold">$13.100</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="#" class="btn btn-verde">Ver Más</a>
-              </div>
-              <small class="text-muted">Stock: 4</small>
-            </div>
-          </div>
-        </div>
-      </div>
+        {% endif %}
+      {% endfor %}
 
     </div>
   </div>
@@ -93,3 +75,8 @@
 
 {% endblock %}
 <!-- FIN CONTENIDO -->
+{% block js %}
+  <script>
+    alert('Bienvenido')
+  </script>
+{% endblock %}

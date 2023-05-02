@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static%}
+{% load crispy_forms_tags %}
+<!-- INICIO CONTENIDO-->
+{% block contenido %}
+<div class="container-fluid d-flex justify-content-center align-items-center vh-100"
+    style="background-color: rgb(207, 207, 207)">
+    <div class="bg-white p-5 rounded-5 text-dark shadow" style="width: 25rem">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form | crispy }}
+            </table>
+            <input type="submit" class="btn btn-verde my-2" value="Guardar">
+        </form>
+        <h3>{{ msj }}</h3>
+    </div>
+</div>
+
+
+{% endblock %}
+<!-- FIN CONTENIDO -->
+{% block js %}
+  
+{% endblock %}
