@@ -10,7 +10,7 @@
 <div class="container-fluid d-flex justify-content-center align-items-center vh-100"
     style="background-color: rgb(207, 207, 207)">
     <div class="bg-white p-5 rounded-5 text-dark shadow" style="width: 25rem">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <table>
                 {{ form | crispy }}

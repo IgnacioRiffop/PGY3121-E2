@@ -15,6 +15,9 @@ class Producto(models.Model):
     stock = models.IntegerField()
     descripcion = models.CharField(max_length=250)
     tipo = models.ForeignKey(TipoProducto, on_delete=models.CASCADE)
+    fecha = models.DateField()
+    imagen = models.ImageField(null=True, blank=True)
+    vigente = models.BooleanField()
 
     def __str__(self):
         return self.nombre

@@ -22,7 +22,7 @@ def addProducto(request):
     }
     
     if request.method == 'POST':
-        formulario = ProductoForm(request.POST) # OBTIENE LA DATA DEL FORMULARIO
+        formulario = ProductoForm(request.POST, files=request.FILES) # OBTIENE LA DATA DEL FORMULARIO
         if formulario.is_valid():
             formulario.save() 
             data['msj'] = "Producto guardado correctamente"
@@ -36,7 +36,7 @@ def updateProducto(request, id):
     }
     
     if request.method == 'POST':
-        formulario = ProductoForm(request.POST, instance=producto) # OBTIENE LA DATA DEL FORMULARIO
+        formulario = ProductoForm(request.POST, instance=producto, files=request.FILES) # OBTIENE LA DATA DEL FORMULARIO
         if formulario.is_valid():
             formulario.save() 
             data['msj'] = "Producto actualizado correctamente"
