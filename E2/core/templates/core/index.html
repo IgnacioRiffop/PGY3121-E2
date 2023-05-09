@@ -11,9 +11,17 @@
 <!-- Bienvenido -->
 <div class="container-fluid suscribir fondo d-flex flex-column justify-content-center align-items-center">
   <div class="text-center text-white">
+    {% if user.is_authenticated %}
+
+    <h1 class="display-1">
+      Bienvenid@! {{ user.username }}
+    </h1>
+    {% else %}
     <h1 class="display-1">
       Bienvenid@!
     </h1>
+    {% endif %}
+
     <div>Todas las compras y suscripciones seran destinadas a una fundación sin fines de lucro.</div>
   </div>
 </div>

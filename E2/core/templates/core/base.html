@@ -13,7 +13,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{% static 'core/css/style.css'%}">
   {% block css %}
-  
+
   {% endblock %}
   <title>Home</title>
 </head>
@@ -28,9 +28,20 @@
       </button>
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesíon</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cuenta' %}">Mi Cuenta</a>
+          </li>
+          {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'login' %}">Iniciar Sesíon</a>
           </li>
+          {% endif %}
+
+
           <li class="nav-item">
             <a class="nav-link" href="{% url 'tienda' %}">Tienda</a>
           </li>
