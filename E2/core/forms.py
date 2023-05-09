@@ -18,3 +18,5 @@ class ProductoForm (ModelForm):
         widgets = {
                 'fecha' : forms.SelectDateWidget(years=range(1940,2023))
         }
+
+        

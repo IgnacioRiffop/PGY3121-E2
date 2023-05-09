@@ -13,3 +13,6 @@ class ProductoAdmin(admin.ModelAdmin):
 
 admin.site.register(TipoProducto)
 admin.site.register(Producto,ProductoAdmin)
+admin.site.register(Cliente)
+admin.site.register(Carrito)
+admin.site.register(Compras)

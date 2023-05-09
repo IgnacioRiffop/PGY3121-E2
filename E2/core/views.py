@@ -1,14 +1,25 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+from django.contrib import messages
+from django.core.paginator import Paginator
 # Create your views here.
 
 ## VIEWS - URLS - HTML
 
 def index(request):
     productosAll = Producto.objects.all() # SELECT * FROM producto
+    page = request.GET.get('page', 1) # OBTENEMOS LA VARIABLE DE LA URL, SI NO EXISTE NADA DEVUELVE 1
+    
+    try:
+        paginator = Paginator(productosAll, 3)
+        productosAll = paginator.page(page)
+    except:
+        raise Http404
+
     data = {
-        'listaProductos' : productosAll
+        'listado': productosAll,
+        'paginator': paginator
     }
     return render(request, 'core/index.html', data)
 
@@ -25,7 +36,8 @@ def addProducto(request):
         formulario = ProductoForm(request.POST, files=request.FILES) # OBTIENE LA DATA DEL FORMULARIO
         if formulario.is_valid():
             formulario.save() 
-            data['msj'] = "Producto guardado correctamente"
+            #data['msj'] = "Producto guardado correctamente"
+            messages.success(request, "Producto almacenado correctamente")
 
     return render(request, 'core/addProducto.html', data)
 
@@ -39,7 +51,8 @@ def updateProducto(request, id):
         formulario = ProductoForm(request.POST, instance=producto, files=request.FILES) # OBTIENE LA DATA DEL FORMULARIO
         if formulario.is_valid():
             formulario.save() 
-            data['msj'] = "Producto actualizado correctamente"
+            #data['msj'] = "Producto actualizado correctamente"
+            messages.success(request, "Producto almacenado correctamente")
             data['form'] = formulario #CARGA LA NUEVA INFO EN EL FORM
             
     return render(request, 'core/updateProducto.html', data)
@@ -60,7 +73,20 @@ def cuenta(request):
     return render(request, ('core/cuenta.html'))
 
 def tienda(request):
-    return render(request, ('core/tienda.html'))
+    productosAll = Producto.objects.all() # SELECT * FROM producto
+    page = request.GET.get('page', 1) # OBTENEMOS LA VARIABLE DE LA URL, SI NO EXISTE NADA DEVUELVE 1
+    
+    try:
+        paginator = Paginator(productosAll, 9)
+        productosAll = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {
+        'listado': productosAll,
+        'paginator': paginator
+    }
+    return render(request, 'core/tienda.html', data)
 
 def tiendaSesion(request):
     return render(request, ('core/tiendaSesion.html'))

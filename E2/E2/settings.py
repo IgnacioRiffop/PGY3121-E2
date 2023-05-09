@@ -132,3 +132,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CONFIGURANDO LA CARPETA PARA LAS IMAGENES
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# CONFIGURA EL SISTEMA DE MENSAJERIA DJANGO
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
