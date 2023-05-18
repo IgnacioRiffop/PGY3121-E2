@@ -1,95 +1,66 @@
+{% extends 'core/base.html' %}
 {% load static%}
+{% load crispy_forms_tags %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block css %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'core/css/style.css'%}">
-    <title>Tienda</title>
-</head>
+{% endblock %}
 
-<body>
+<!-- INICIO CONTENIDO-->
+{% block contenido %}
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.html"><i class="fa-solid fa-paw"></i></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">Iniciar Sesíon</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="tienda.html">Tienda</a>
-              </li>
-            </ul>
+<!-- Contenido -->
+<div class="container py-5">
+  <div class="row">
+    <!-- Lateral izq -->
+    <div class="col-sm-6 col-izq ">
+      <div class="row producto">
+        <div class="card shadow-sm">
+          <img src="{{ producto.imagen.url }}" class="responsiveProd" width="100%" height="350">
+        </div>
+      </div>
+    </div>
+    <!-- Fin Lateral izq -->
+
+    <!-- Lateral der -->
+    <div class="col-sm-6">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="col-6">
+          <p class="fs-3">{{ producto.nombre }}</p>
+          <p class="fs-4 fw-bold">${{ producto.precio }}</p>
+          {{form | crispy}}
+        </div>
+        <div class="col-12">
+          {% if user.is_authenticated %}
+          <div class="col-12">
+            <input type="submit" class="btn btn-verde btn-lg my-3" value="Agregar al carrito">
           </div>
+          {% else %}
+          <a href="carrito.html" class="btn btn-success btn-lg mt-3 disabled">Agregar al carrito</a>
+          <div class="d-flex gap-1 mt-1">
+            <a href="registro.html" class="text-decoration-none fw-semibold ltr-verde">Regístrate</a>
+            <div>/</div>
+            <a href="login.html" class="text-decoration-none fw-semibold ltr-verde">Inicia Sesíon </a>
+            <div> para comprar en la tienda!</div>
+          </div>
+          {% endif %}
         </div>
-      </nav>
-    <!-- Fin Navbar -->
+      </form>
+      <div class="col-12 mt-3">
+        <p class="fs-5 my-1">Descripción</p>
+        <p class="fs-6 my-1">{{ producto.descripcion }}</p>
+      </div>
 
-    <!-- Contenido -->
-    <div class="container py-5">
-        <div class="row">
-            <!-- Lateral izq -->
-            <div class="col-sm-6 col-izq ">
-                <div class="row producto">
-                    <div class="card shadow-sm">
-                        <img src="{% static 'core/img/collarblanco' %}.jpg" class="responsiveProd" width="100%" height="350">
-                      </div>
-                </div>
-            </div>
-            <!-- Fin Lateral izq -->
+    </div>
 
-            <!-- Lateral der -->
-            <div class="col-sm-6">
-                <div class="col-12">
-                    <p class="fs-3">Collar Martingale WhiteOwl Perro</p>
-                    <p class="fs-4 fw-bold">$30.250</p>
-                    <div class="btn-group mt-2" role="group" aria-label="Basic radio toggle button group">
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                        <label class="btn btn-outline-success" for="btnradio1"> S </label>
-                      
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                        <label class="btn btn-outline-success" for="btnradio2"> M </label>
-                      
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                        <label class="btn btn-outline-success" for="btnradio3"> L </label>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <a href="carrito.html" class="btn btn-success btn-lg mt-3 disabled">Agregar al carrito</a>
-                    <div class="d-flex gap-1 mt-1">
-                        <a href="registro.html" class="text-decoration-none fw-semibold ltr-verde">Regístrate</a>
-                        <div>/</div>
-                        <a href="login.html" class="text-decoration-none fw-semibold ltr-verde">Inicia Sesíon </a>
-                        <div> para comprar en la tienda!</div>
-                    </div>
-                </div>
-                <div class="col-12 mt-3">
-                    <p class="fs-5 my-1">Descripción</p>
-                    <p class="fs-6 my-1">Collar para perros anti tirones con diseño de líneas en blanco y negro Tela hecha de poliéster Gancho de acero Tela suave para cuidar el cuello de tu perro</p>
-                </div>
-                
-            </div>
-            
-            <!-- Fin Lateral der -->
+    <!-- Fin Lateral der -->
 
-        </div>
-        <!-- Fin Contenido -->
+  </div>
+  <!-- Fin Contenido -->
 
-        <!-- Latest compiled JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  {% endblock %}
+  <!-- FIN CONTENIDO -->
+  {% block js %}
 
-</html>
+  {% endblock %}

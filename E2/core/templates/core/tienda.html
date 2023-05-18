@@ -31,7 +31,7 @@
                 <p class="card-text fw-bold">${{ prod.precio }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="{% url 'producto' %}" class="btn btn-verde">Ver Más</a>
+                    <a href="{% url 'producto' user.username prod.id %}" class="btn btn-verde">Ver Más</a>
                     <a href="{% url 'updateProducto' prod.id %}" class="btn btn-verde">Modificar</a>
                     <a onclick="deleteProducto({{ prod.id }})" class="btn btn-verde">Eliminar</a>
                   </div>

@@ -19,4 +19,19 @@ class ProductoForm (ModelForm):
                 'fecha' : forms.SelectDateWidget(years=range(1940,2023))
         }
 
-        
+
+class CantidadForm (ModelForm):
+    cantidad = forms.IntegerField(min_value=1, max_value=5 ,widget=forms.NumberInput(attrs={"placeholder":"Ingrese Cantidad"}))
+
+    class Meta:
+        model = Carrito
+        fields = ['cantidad']
+
+class CarritoForm (ModelForm):
+    cliente = forms.CharField()
+    producto = forms.IntegerField()
+    cantidad = forms.IntegerField(min_value=1, max_value=5 ,widget=forms.NumberInput(attrs={"placeholder":"Ingrese Cantidad"}))
+
+    class Meta:
+        model = Carrito
+        fields = ['cantidad']
