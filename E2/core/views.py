@@ -110,7 +110,6 @@ def producto(request, usuario, id):
     if request.method == 'POST':
         formulario = CantidadForm(request.POST, files=request.FILES) # OBTIENE LA DATA DEL FORMULARIO
         if formulario.is_valid():
-            Carrito.objects.all().delete()
             carrito = Carrito.objects.create(cliente=cliente,cantidad=formulario.data["cantidad"])
             carrito.producto.add(producto)
             
