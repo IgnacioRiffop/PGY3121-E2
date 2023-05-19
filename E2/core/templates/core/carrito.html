@@ -1,4 +1,4 @@
-{% extends 'core/baseSesion.html' %}
+{% extends 'core/base.html' %}
 {% load static%}
 
 {% block css %}
@@ -42,51 +42,29 @@
         <!-- Lateral der -->
         <div class="col-sm-7">
             <h5 class="">Carrito</h5>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{% static 'core/img/collarblanco.jpg' %}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Collar Martingale WhiteOwl Perro</h5>
-                            <p class="card-text">$30.250</p>
-                            <p class="card-text"><small class="text-body-secondary">Talla M</small></p>
-                            <div class="row">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Cantidad</span>
-                                    <input type="number" class="form-control" aria-label="Sizing example input"
-                                        aria-describedby="inputGroup-sizing-sm" value="1">
+            {% for carrito in listado %}
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ carrito.producto.imagen.url }}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ carrito.producto.nombre }}</h5>
+                                <p class="card-text">${{ carrito.producto.precio }}</p>
+                                <div class="row">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Cantidad</span>
+                                        <input type="number" class="form-control" aria-label="Sizing example input"
+                                            aria-describedby="inputGroup-sizing-sm" value="{{ carrito.cantidad }}">
+                                    </div>
                                 </div>
+                                <a href="#" class="btn btn-danger btn-sm">Quitar</a>
                             </div>
-                            <a href="#" class="btn btn-danger btn-sm">Quitar</a>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{% static 'core/img/arnesverdedog.jpg' %}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Arnes H Hawkins Stranger Things para Perro</h5>
-                            <p class="card-text">$12.900</p>
-                            <p class="card-text"><small class="text-body-secondary">Talla S</small></p>
-                            <div class="row">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Cantidad</span>
-                                    <input type="number" class="form-control" aria-label="Sizing example input"
-                                        aria-describedby="inputGroup-sizing-sm" value="2">
-                                </div>
-                            </div>
-                            <a href="#" class="btn btn-danger btn-sm">Quitar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <!-- Fin Lateral der -->
     </div>

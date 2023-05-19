@@ -64,8 +64,15 @@ def deleteProducto(request, id):
 # FIN CRUD PRODUCTO
 
 
-def carrito(request):
-    return render(request, ('core/carrito.html'))
+def carrito(request, usuario):
+    cliente = Cliente.objects.filter(usuario=usuario)[:1]
+    CarritoCliente = Carrito.objects.filter(cliente=cliente)
+
+    data = {
+        'listado': CarritoCliente
+    }
+
+    return render(request, 'core/carrito.html', data)
 
 def compra(request):
     return render(request, ('core/compra.html'))
@@ -110,8 +117,9 @@ def producto(request, usuario, id):
     if request.method == 'POST':
         formulario = CantidadForm(request.POST, files=request.FILES) # OBTIENE LA DATA DEL FORMULARIO
         if formulario.is_valid():
-            carrito = Carrito.objects.create(cliente=cliente,cantidad=formulario.data["cantidad"])
-            carrito.producto.add(producto)
+            #Carrito.objects.all().delete()
+            carrito = Carrito.objects.create(cliente=cliente,producto=producto,cantidad=formulario.data["cantidad"])
+            #carrito.producto.add(producto)
             
     return render(request, ('core/producto.html'), data)
 
