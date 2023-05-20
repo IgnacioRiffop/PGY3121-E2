@@ -9,8 +9,8 @@
 {% block contenido %}
 
 <div class="p-3 pb-md-4 mx-auto text-center">
-  <h1 class="display-4 fw-normal">Tienda</h1>
-  <p class="fs-5 text-muted">Encuentra todos los accesesorios que buscas para tus mascotas!</p>
+  <h1 class="display-4 fw-normal">Administración Productos</h1>
+  <a href="{% url 'addProducto' %}" class="btn btn-verde">Agregar Producto</a>
 </div>
 
 <!-- Tienda -->
@@ -32,6 +32,8 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a href="{% url 'producto' prod.id %}" class="btn btn-verde">Ver Más</a>
+                    <a href="{% url 'updateProducto' prod.id %}" class="btn btn-verde">Modificar</a>
+                    <a onclick="deleteProducto({{ prod.id }})" class="btn btn-verde">Eliminar</a>
                   </div>
                   <small class="text-muted">Stock: {{ prod.stock }}</small>
                 </div>

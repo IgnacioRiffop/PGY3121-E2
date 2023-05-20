@@ -68,10 +68,8 @@
                   <div class="btn-group">
                     {% if user.is_authenticated %}
                       <a href="{% url 'producto' prod.id %}" class="btn btn-verde">Ver Más</a>
-                      <a href="{% url 'updateProducto' prod.id %}" class="btn btn-verde">Modificar</a>
-                      <a onclick="deleteProducto({{ prod.id }})" class="btn btn-verde">Eliminar</a>
                     {% else %}
-                      <a href="{% url 'producto' 'invitado' prod.id %}" class="btn btn-verde">Ver Más</a>
+                      <a href="{% url 'producto' prod.id %}" class="btn btn-verde">Ver Más</a>
                     {% endif %}
 
                   </div>

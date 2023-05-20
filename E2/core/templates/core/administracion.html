@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+{% load static%}
+
+{% block css %}
+
+{% endblock %}
+
+<!-- INICIO CONTENIDO-->
+{% block contenido %}
+
+<!-- Contenido -->
+<div class="container py-5">
+    <div class="row">
+        <!-- Lateral izq -->
+        <div class="col-sm-4 col-izq ">
+            <div class="row perfil">
+                <div class="col-sm-12 bg-white p-5 rounded-4 text-dark shadow">
+                    <h3>Administración</h3>
+                    <h5>Hola, {{ user.username }}</h5>
+                    <div class="list-group my-3">
+                        <a href="{% url 'adminProductos' %}" class="list-group-item list-group-item-action btn btn-verde"
+                            aria-current="true">
+                            Productos
+                        </a>
+                        <a href="{% url 'suscripcionAdmin' %}" class="list-group-item list-group-item-action my-1 btn btn-verde">
+                            Suscripciones</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- FIN CONTENIDO -->
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'core/js/mensajeProducto.js' %}"></script>
+{% endblock %}

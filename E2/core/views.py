@@ -60,7 +60,7 @@ def updateProducto(request, id):
 def deleteProducto(request, id):
     producto = Producto.objects.get(id=id)
     producto.delete()
-    return redirect(to='index')
+    return redirect(to='adminProductos')
 # FIN CRUD PRODUCTO
 
 
@@ -110,6 +110,7 @@ def producto(request, id):
     cliente = Cliente.objects.get(usuario=request.user.username)
     data = {
         'producto': producto,
+        'usuario': request.user.username,
         'form' : CantidadForm(initial={'cantidad': 1})
     }
 
@@ -119,6 +120,7 @@ def producto(request, id):
             #Carrito.objects.all().delete()
             carrito = Carrito.objects.create(cliente=cliente,producto=producto,cantidad=formulario.data["cantidad"])
             #carrito.producto.add(producto)
+
             
     return render(request, ('core/producto.html'), data)
 
@@ -140,6 +142,25 @@ def recuperarPass(request):
 def base(request):
     return render(request, ('core/base.html'))
 
+def administracion(request):
+    return render(request, ('core/administracion.html'))
+
+def adminProductos(request):
+    productosAll = Producto.objects.all() # SELECT * FROM producto
+    page = request.GET.get('page', 1) # OBTENEMOS LA VARIABLE DE LA URL, SI NO EXISTE NADA DEVUELVE 1
+    
+    try:
+        paginator = Paginator(productosAll, 9)
+        productosAll = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {
+        'listado': productosAll,
+        'paginator': paginator
+    }
+    return render(request, 'core/adminProductos.html', data)
+
 # CRUD CARRITO
 def deleteCarrito(request, id):
     itemCarrito = Carrito.objects.get(id=id)
@@ -147,3 +168,4 @@ def deleteCarrito(request, id):
     itemCarrito.delete()
     return redirect(to='carrito')
 # FIN CRUD CARRITO
+

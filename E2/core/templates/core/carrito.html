@@ -53,11 +53,7 @@
                                 <h5 class="card-title">{{ carrito.producto.nombre }}</h5>
                                 <p class="card-text">${{ carrito.producto.precio }}</p>
                                 <div class="row">
-                                    <div class="input-group input-group-sm mb-3">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">Cantidad</span>
-                                        <input type="number" class="form-control" aria-label="Sizing example input"
-                                            aria-describedby="inputGroup-sizing-sm" value="{{ carrito.cantidad }}">
-                                    </div>
+                                    <h6 class="text-muted">Cantidad: {{ carrito.cantidad }}</h6>
                                 </div>
                                 <a onclick="deleteCarrito({{ carrito.id }})" class="btn btn-danger btn-sm">Quitar</a>
                             </div>

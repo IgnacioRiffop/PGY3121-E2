@@ -23,4 +23,6 @@ urlpatterns = [
     path('voucher/', voucher, name="voucher"),
     path('recuperarPass/', recuperarPass, name="recuperarPass"),
     path('base/', base, name="base"),
+    path('administracion/', administracion, name="administracion"),
+    path('adminProductos/', adminProductos, name="adminProductos"),
 ]
