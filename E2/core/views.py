@@ -141,3 +141,10 @@ def recuperarPass(request):
 def base(request):
     return render(request, ('core/base.html'))
 
+# CRUD CARRITO
+def deleteCarrito(request, id):
+    itemCarrito = Carrito.objects.get(id=id)
+    usuario = itemCarrito.cliente
+    itemCarrito.delete()
+    return redirect(to='carrito')
+# FIN CRUD CARRITO

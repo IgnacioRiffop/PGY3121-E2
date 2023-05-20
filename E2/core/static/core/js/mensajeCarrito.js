@@ -1,13 +1,8 @@
-
-function mensaje(){
-    alert('Bienvenido a la pagina');
-}
-
-function deleteProducto(id){
+function deleteCarrito(id){
     //console.log("ID PRODUCTO: "+id);
     Swal.fire({
       title: 'Eliminar',
-      text: 'Desea eliminar los datos?',
+      text: '¿Desea eliminar producto del carrito?',
       icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -17,8 +12,8 @@ function deleteProducto(id){
     }).then((result) => {
       if (result.isConfirmed) {
         swal.fire('Eliminado!','Producto eliminado correctamente', 'success').then(function(){
-            window.location.href = "/deleteProducto/"+id+"/";
+            window.location.href = "/deleteCarrito/"+id+"/";
         })
       }
     })
-}
+  }
