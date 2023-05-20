@@ -64,8 +64,8 @@ def deleteProducto(request, id):
 # FIN CRUD PRODUCTO
 
 
-def carrito(request, usuario):
-    cliente = Cliente.objects.filter(usuario=usuario)[:1]
+def carrito(request):
+    cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
     CarritoCliente = Carrito.objects.filter(cliente=cliente)
 
     data = {
@@ -105,12 +105,11 @@ def login(request):
 def registro(request):
     return render(request, ('core/registro.html'))
 
-def producto(request, usuario, id):
+def producto(request, id):
     producto = Producto.objects.get(id=id)
-    cliente = Cliente.objects.get(usuario=usuario)
+    cliente = Cliente.objects.get(usuario=request.user.username)
     data = {
         'producto': producto,
-        'usuario': usuario,
         'form' : CantidadForm(initial={'cantidad': 1})
     }
 
