@@ -107,7 +107,10 @@ def registro(request):
 
 def producto(request, id):
     producto = Producto.objects.get(id=id)
-    cliente = Cliente.objects.get(usuario=request.user.username)
+    try:
+        cliente = Cliente.objects.get(usuario=request.user.username)
+    except Cliente.DoesNotExist:
+        cliente = None
     data = {
         'producto': producto,
         'usuario': request.user.username,

@@ -39,9 +39,9 @@
           {% else %}
           <a href="carrito.html" class="btn btn-success btn-lg mt-3 disabled">Agregar al carrito</a>
           <div class="d-flex gap-1 mt-1">
-            <a href="registro.html" class="text-decoration-none fw-semibold ltr-verde">Regístrate</a>
+            <a href="{% url 'registro' %}" class="text-decoration-none fw-semibold ltr-verde">Regístrate</a>
             <div>/</div>
-            <a href="login.html" class="text-decoration-none fw-semibold ltr-verde">Inicia Sesíon </a>
+            <a href="{% url 'login' %}" class="text-decoration-none fw-semibold ltr-verde">Inicia Sesíon </a>
             <div> para comprar en la tienda!</div>
           </div>
           {% endif %}
