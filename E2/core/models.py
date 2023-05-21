@@ -49,16 +49,16 @@ class Compras(models.Model):
     def __str__(self):
         return self.cliente.usuario
     
-class Suscripcion(models.Model):
+class TipoSuscripcion(models.Model):
     nombre = models.CharField(max_length=50)
     precio = models.IntegerField()
 
     def __str__(self):
         return self.nombre
     
-class ClienteSuscripcion(models.Model):
+class Suscripcion(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    suscripcion = models.ForeignKey(Suscripcion, on_delete=models.CASCADE)
+    suscripcion = models.ForeignKey(TipoSuscripcion, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.cliente.usuario

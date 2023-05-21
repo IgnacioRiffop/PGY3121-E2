@@ -128,10 +128,29 @@ def productoSesion(request):
     return render(request, ('core/productoSesion.html'))
 
 def suscripcion(request):
-    return render(request, ('core/suscripcion.html'))
+    basica = TipoSuscripcion.objects.get(id=1)
+    intermedia = TipoSuscripcion.objects.get(id=2)
+    alta = TipoSuscripcion.objects.get(id=3)
+    data = {
+        'basica': basica,
+        'intermedia': intermedia,
+        'alta' : alta
+    }
+    return render(request, 'core/suscripcion.html', data)
 
 def suscripcionAdmin(request):
     return render(request, ('core/suscripcionAdmin.html'))
+
+def miSuscripcion(request):
+    return render(request, ('core/miSuscripcion.html'))
+
+# CRUD Suscripcion
+def addSuscripcion(request, id):
+    cliente = Cliente.objects.get(usuario=request.user.username)
+    tipoSuscripcion = TipoSuscripcion.objects.get(id=id)
+    suscripcion = Suscripcion.objects.create(cliente=cliente, suscripcion=tipoSuscripcion)
+    return redirect(to='suscripcion')
+# FIN CRUD Suscripcion
 
 def voucher(request):
     return render(request, ('core/voucher.html'))

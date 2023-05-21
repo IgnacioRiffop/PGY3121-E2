@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+{% load static%}
+
+{% block css %}
+  
+{% endblock %}
+
+<!-- INICIO CONTENIDO-->
+{% block contenido %}
+
+
+
+<!-- Contenido -->
+<div class="container py-5">
+  <div class="row">
+    <!-- Lateral izq -->
+    <div class="col-sm-3 col-izq ">
+      <div class="row perfil">
+        <div class="col-sm-12 bg-white p-5 rounded-4 text-dark shadow">
+          <h3>Mi Cuenta</h3>
+          <h5>Hola, Ignacio</h5>
+          <div class="list-group my-3">
+            <a href="{% url 'cuenta' %}" class="list-group-item list-group-item-action" aria-current="true">
+              Mis Compras
+            </a>
+            <a href="{% url 'suscripcionAdmin' %}" class="list-group-item list-group-item-action  btn btn-verde">Mi
+              Suscripción</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+      </div>
+    </div>
+
+    <!-- Fin Lateral izq -->
+
+    <!-- Lateral der -->
+    <div class="col-sm-9">
+        <h5 class="">Mi Suscripción</h5>
+        <h5 class="text-muted">No tienes ninguna suscripcion activa!</h5>
+        <a href="{% url 'suscripcion' %}" class="btn btn-verde">Iniciar Suscripcion</a>
+    </div>
+    <!-- Fin Lateral der -->
+  </div>
+  <!-- Fin Contenido -->
+
+  {% endblock %}
+  <!-- FIN CONTENIDO -->
+  {% block js %}
+  
+  {% endblock %}
