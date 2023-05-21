@@ -1,4 +1,4 @@
-{% extends 'core/baseSesion.html' %}
+{% extends 'core/base.html' %}
 {% load static%}
 
 {% block css %}
@@ -8,58 +8,59 @@
 <!-- INICIO CONTENIDO-->
 {% block contenido %}
 
-
-
 <!-- Contenido -->
-<div class="container py-5">
-  <div class="row">
-    <!-- Lateral izq -->
-    <div class="col-sm-3 col-izq ">
-      <div class="row perfil">
-        <div class="col-sm-12 bg-white p-5 rounded-4 text-dark shadow">
-          <h3>Mi Cuenta</h3>
-          <h5>Hola, Ignacio</h5>
-          <div class="list-group my-3">
-            <a href="{% url 'cuenta' %}" class="list-group-item list-group-item-action" aria-current="true">
-              Mis Compras
-            </a>
-            <a href="{% url 'suscripcionAdmin' %}" class="list-group-item list-group-item-action  btn btn-verde">Mi
-              Suscripción</a>
-          </div>
+<div class="container">
+  <div class="p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Suscripción</h1>
+    <p class="fs-5 text-muted">Elige la donación que mas te acomode y ya estarás ayudando a los animales dentro de la
+      fundación sin fines de lucro. Además obtendrás un 5% de descuento en el total de tu compra!</p>
+  </div>
+  {% if suscripcionCliente == none %}
+  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">{{basica.nombre}}</h4>
         </div>
-      </div>
-      <div class="col-sm-12">
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">${{basica.precio}}<small class="text-muted fw-light">/mes</small></h1>
+          <a onclick="confirmarSuscripcion({{ basica.id }})" type="button" class="w-100 btn btn-lg btn-outline-success mt-4">Elegir</a>
+        </div>
       </div>
     </div>
-
-    <!-- Fin Lateral izq -->
-
-    <!-- Lateral der -->
-    <div class="col-sm-9">
-      <h5 class="">Mi Suscripción</h5>
-      <div class="col-4">
-        <div class="card mb-2 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-white bg-primary border-primary">
-            <h4 class="my-0 fw-normal">Alta</h4>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title pricing-card-title">$30.000<small class="text-muted fw-light">/mes</small></h3>
-          </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm border-info">
+        <div class="card-header py-3 bg-info text-white border-info">
+          <h4 class="my-0 fw-normal">{{intermedia.nombre}}</h4>
         </div>
-        <div class="btn-group">
-          <a href="suscripcionModificar.html" class="btn btn-secondary">Modificar</a>
-          <a href="#" class="btn btn-danger">Cancelar</a>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">${{intermedia.precio}}<small class="text-muted fw-light">/mes</small></h1>
+          <a onclick="confirmarSuscripcion({{ intermedia.id }})" type="button" class="w-100 btn btn-lg btn-info text-white mt-4">Elegir</a>
         </div>
       </div>
-      <h5 class="mt-3">Dia de renovación:</h5>
-      <p class="fs-6">02/05/2023</p>
-      <!-- Fin Lateral der -->
+    </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm border-primary">
+        <div class="card-header py-3 text-white bg-primary border-primary">
+          <h4 class="my-0 fw-normal">{{alta.nombre}}</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">${{alta.precio}}<small class="text-muted fw-light">/mes</small></h1>
+          <a onclick="confirmarSuscripcion({{ alta.id }})" type="button" class="w-100 btn btn-lg btn-primary mt-4">Elegir</a>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- Fin Contenido -->
+  {% endif %}
+</div>
 
-  {% endblock %}
-  <!-- FIN CONTENIDO -->
-  {% block js %}
-  
-  {% endblock %}
+
+<!-- Fin Contenido-->
+
+
+{% endblock %}
+<!-- FIN CONTENIDO -->
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'core/js/mensajeSuscripcion.js' %}"></script>
+{% endblock %}

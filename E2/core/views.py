@@ -131,10 +131,19 @@ def suscripcion(request):
     basica = TipoSuscripcion.objects.get(id=1)
     intermedia = TipoSuscripcion.objects.get(id=2)
     alta = TipoSuscripcion.objects.get(id=3)
+    
+    cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
+    try:
+        suscripcionCliente = Suscripcion.objects.get(cliente=cliente)
+    except Suscripcion.DoesNotExist:
+        suscripcionCliente = None
+
     data = {
         'basica': basica,
         'intermedia': intermedia,
-        'alta' : alta
+        'alta' : alta,
+        'suscripcionCliente' : suscripcionCliente
+
     }
     return render(request, 'core/suscripcion.html', data)
 
@@ -149,6 +158,12 @@ def addSuscripcion(request, id):
     cliente = Cliente.objects.get(usuario=request.user.username)
     tipoSuscripcion = TipoSuscripcion.objects.get(id=id)
     suscripcion = Suscripcion.objects.create(cliente=cliente, suscripcion=tipoSuscripcion)
+    return redirect(to='suscripcion')
+
+def deleteSuscripcion(request, id):
+    cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
+    suscripcionCliente = Suscripcion.objects.get(cliente=cliente)
+    suscripcionCliente.delete()
     return redirect(to='suscripcion')
 # FIN CRUD Suscripcion
 

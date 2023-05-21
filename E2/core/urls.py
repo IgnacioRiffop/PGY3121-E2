@@ -21,6 +21,7 @@ urlpatterns = [
     path('suscripcion/', suscripcion, name="suscripcion"),
     path('miSuscripcion/', miSuscripcion, name="miSuscripcion"),
     path('addSuscripcion/<id>/', addSuscripcion, name="addSuscripcion"),
+    path('deleteSuscripcion/<id>/', deleteSuscripcion, name="deleteSuscripcion"),
     path('suscripcionAdmin/', suscripcionAdmin, name="suscripcionAdmin"),
     path('voucher/', voucher, name="voucher"),
     path('recuperarPass/', recuperarPass, name="recuperarPass"),
