@@ -10,12 +10,13 @@
 
 <!-- Contenido -->
 <div class="container">
+  <a href="{% url 'miSuscripcion' %}" class="btn btn-verde my-3">Volver</a>
   <div class="p-3 pb-md-4 mx-auto text-center">
     <h1 class="display-4 fw-normal">Suscripción</h1>
     <p class="fs-5 text-muted">Elige la donación que mas te acomode y ya estarás ayudando a los animales dentro de la
       fundación sin fines de lucro. Además obtendrás un 5% de descuento en el total de tu compra!</p>
   </div>
-  {% if suscripcionCliente == none %}
+
   <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     <div class="col">
       <div class="card mb-4 rounded-3 shadow-sm">
@@ -24,7 +25,7 @@
         </div>
         <div class="card-body">
           <h1 class="card-title pricing-card-title">${{basica.precio}}<small class="text-muted fw-light">/mes</small></h1>
-          <a onclick="confirmarSuscripcion({{ basica.id }})" type="button" class="w-100 btn btn-lg btn-outline-success mt-4">Elegir</a>
+          <a onclick="cambiarSuscripcion({{ basica.id }})" type="button" class="w-100 btn btn-lg btn-outline-success mt-4">Elegir</a>
         </div>
       </div>
     </div>
@@ -35,7 +36,7 @@
         </div>
         <div class="card-body">
           <h1 class="card-title pricing-card-title">${{intermedia.precio}}<small class="text-muted fw-light">/mes</small></h1>
-          <a onclick="confirmarSuscripcion({{ intermedia.id }})" type="button" class="w-100 btn btn-lg btn-info text-white mt-4">Elegir</a>
+          <a onclick="cambiarSuscripcion({{ intermedia.id }})" type="button" class="w-100 btn btn-lg btn-info text-white mt-4">Elegir</a>
         </div>
       </div>
     </div>
@@ -46,12 +47,12 @@
         </div>
         <div class="card-body">
           <h1 class="card-title pricing-card-title">${{alta.precio}}<small class="text-muted fw-light">/mes</small></h1>
-          <a onclick="confirmarSuscripcion({{ alta.id }})" type="button" class="w-100 btn btn-lg btn-primary mt-4">Elegir</a>
+          <a onclick="cambiarSuscripcion({{ alta.id }})" type="button" class="w-100 btn btn-lg btn-primary mt-4">Elegir</a>
         </div>
       </div>
     </div>
   </div>
-  {% endif %}
+
 </div>
 
 
@@ -63,4 +64,5 @@
 {% block js %}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{% static 'core/js/mensajeSuscripcion.js' %}"></script>
+<script src="{% static 'core/js/cambiarSuscripcion.js' %}"></script>
 {% endblock %}

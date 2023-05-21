@@ -148,10 +148,44 @@ def suscripcion(request):
     return render(request, 'core/suscripcion.html', data)
 
 def suscripcionAdmin(request):
-    return render(request, ('core/suscripcionAdmin.html'))
+    basica = TipoSuscripcion.objects.get(id=1)
+    intermedia = TipoSuscripcion.objects.get(id=2)
+    alta = TipoSuscripcion.objects.get(id=3)
+    
+    cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
+    try:
+        suscripcionCliente = Suscripcion.objects.get(cliente=cliente)
+    except Suscripcion.DoesNotExist:
+        suscripcionCliente = None
+
+    data = {
+        'basica': basica,
+        'intermedia': intermedia,
+        'alta' : alta,
+        'suscripcionCliente' : suscripcionCliente
+
+    }
+    return render(request, 'core/suscripcionAdmin.html', data)
 
 def miSuscripcion(request):
-    return render(request, ('core/miSuscripcion.html'))
+    basica = TipoSuscripcion.objects.get(id=1)
+    intermedia = TipoSuscripcion.objects.get(id=2)
+    alta = TipoSuscripcion.objects.get(id=3)
+    
+    cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
+    try:
+        suscripcionCliente = Suscripcion.objects.get(cliente=cliente)
+    except Suscripcion.DoesNotExist:
+        suscripcionCliente = None
+
+    data = {
+        'basica': basica,
+        'intermedia': intermedia,
+        'alta' : alta,
+        'suscripcionCliente' : suscripcionCliente
+
+    }
+    return render(request, 'core/miSuscripcion.html', data)
 
 # CRUD Suscripcion
 def addSuscripcion(request, id):
@@ -164,6 +198,14 @@ def deleteSuscripcion(request, id):
     cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
     suscripcionCliente = Suscripcion.objects.get(cliente=cliente)
     suscripcionCliente.delete()
+    return redirect(to='suscripcion')
+
+def updateSuscripcion(request, id):
+    cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
+    tipoSuscripcion = TipoSuscripcion.objects.get(id=id)
+    suscripcionCliente = Suscripcion.objects.get(cliente=cliente)
+    suscripcionCliente.suscripcion = tipoSuscripcion
+    suscripcionCliente.save()
     return redirect(to='suscripcion')
 # FIN CRUD Suscripcion
 

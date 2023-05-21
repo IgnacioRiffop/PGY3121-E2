@@ -36,9 +36,15 @@
 
     <!-- Lateral der -->
     <div class="col-sm-9">
+      {% if suscripcionCliente == none %}
         <h5 class="">Mi Suscripción</h5>
-        <h5 class="text-muted">No tienes ninguna suscripcion activa!</h5>
+        <h5 class="text-muted">No tienes ninguna suscripción activa!</h5>
         <a href="{% url 'suscripcion' %}" class="btn btn-verde">Iniciar Suscripcion</a>
+      {% else %}
+        <h5 class="">Mi Suscripción</h5>
+        <h5 class="text-muted">Tienes activa la suscripción {{suscripcionCliente.suscripcion.nombre}} </h5>
+        <a href="{% url 'suscripcion' %}" class="btn btn-verde">Administrar</a>
+      {% endif %}
     </div>
     <!-- Fin Lateral der -->
   </div>

@@ -10,6 +10,7 @@
 
 <!-- Contenido -->
 <div class="container">
+  <a href="{% url 'miSuscripcion' %}" class="btn btn-verde my-3">Volver</a>
   <div class="p-3 pb-md-4 mx-auto text-center">
     <h1 class="display-4 fw-normal">Suscripción</h1>
     <p class="fs-5 text-muted">Elige la donación que mas te acomode y ya estarás ayudando a los animales dentro de la
@@ -61,7 +62,7 @@
         <div class="card-body">
           <h1 class="card-title pricing-card-title">${{basica.precio}}<small class="text-muted fw-light">/mes</small></h1>
           <div class="btn-group">
-            <a onclick="confirmarSuscripcion({{ alta.id }})" type="button" class="w-100 btn btn-lg btn-primary mt-4">Modificar</a>
+            <a href="{% url 'suscripcionAdmin' %}" type="button" class="w-100 btn btn-lg btn-primary mt-4">Modificar</a>
             <a onclick="eliminarSuscripcion({{ suscripcionCliente.id }})" type="button" class="w-100 btn btn-lg btn-danger mt-4">Cancelar</a>
           </div>
         </div>
@@ -78,7 +79,7 @@
         <div class="card-body">
           <h1 class="card-title pricing-card-title">${{intermedia.precio}}<small class="text-muted fw-light">/mes</small></h1>
           <div class="btn-group">
-            <a onclick="confirmarSuscripcion({{ alta.id }})" type="button" class="w-100 btn btn-lg btn-primary mt-4">Modificar</a>
+            <a href="{% url 'suscripcionAdmin' %}" type="button" class="w-100 btn btn-lg btn-primary mt-4">Modificar</a>
             <a onclick="eliminarSuscripcion({{ suscripcionCliente.id }})" type="button" class="w-100 btn btn-lg btn-danger mt-4">Cancelar</a>
           </div>
         </div>
@@ -95,7 +96,7 @@
         <div class="card-body">
           <h1 class="card-title pricing-card-title">${{alta.precio}}<small class="text-muted fw-light">/mes</small></h1>
           <div class="btn-group">
-            <a onclick="confirmarSuscripcion({{ alta.id }})" type="button" class="w-100 btn btn-lg btn-primary mt-4">Modificar</a>
+            <a href="{% url 'suscripcionAdmin' %}" type="button" class="w-100 btn btn-lg btn-primary mt-4">Modificar</a>
             <a onclick="eliminarSuscripcion({{ suscripcionCliente.id }})" type="button" class="w-100 btn btn-lg btn-danger mt-4">Cancelar</a>
           </div>
         </div>
