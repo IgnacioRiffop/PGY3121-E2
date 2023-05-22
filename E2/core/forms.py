@@ -21,7 +21,7 @@ class ProductoForm (ModelForm):
 
 
 class CantidadForm (ModelForm):
-    cantidad = forms.IntegerField(min_value=1, max_value=5 ,widget=forms.NumberInput(attrs={"placeholder":"Ingrese Cantidad"}))
+    cantidad = forms.IntegerField(min_value=1 ,widget=forms.NumberInput(attrs={"placeholder":"Ingrese Cantidad"}))
 
     class Meta:
         model = Carrito
