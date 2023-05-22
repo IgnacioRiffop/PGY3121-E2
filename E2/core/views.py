@@ -67,6 +67,7 @@ def deleteProducto(request, id):
 def carrito(request):
     cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
     CarritoCliente = Carrito.objects.filter(cliente=cliente)
+    existe = CarritoCliente.exists()
 
     #Subtotal Carrito
     subtotal = sum(carrito.producto.precio*carrito.cantidad for carrito in CarritoCliente)
@@ -92,7 +93,9 @@ def carrito(request):
         'subtotal': subtotal,
         'descuento': descuento,
         'envio': envio,
-        'total': total
+        'total': total,
+        'existe': existe,
+        'form': envioForm()
     }
 
     return render(request, 'core/carrito.html', data)
@@ -236,7 +239,36 @@ def updateSuscripcion(request, id):
 # FIN CRUD Suscripcion
 
 def voucher(request):
-    return render(request, ('core/voucher.html'))
+    cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
+    CarritoCliente = Carrito.objects.filter(cliente=cliente)
+
+    #Subtotal Carrito
+    subtotal = sum(carrito.producto.precio*carrito.cantidad for carrito in CarritoCliente)
+
+    # Descuento Suscripcion
+    try:
+        suscripcionCliente = Suscripcion.objects.get(cliente=cliente)
+    except Suscripcion.DoesNotExist:
+        suscripcionCliente = None
+    if suscripcionCliente != None:
+        descuento = round(subtotal*0.05)
+    else:
+        descuento = 0
+
+    #Envio
+    envio = 3000
+
+    #Total
+    total = subtotal-descuento+envio
+
+    data = {
+        'subtotal': subtotal,
+        'descuento': descuento,
+        'envio': envio,
+        'total': total
+    }
+    CarritoCliente.delete()
+    return render(request, 'core/voucher.html', data)
 
 def recuperarPass(request):
     return render(request, ('core/recuperarPass.html'))

@@ -43,8 +43,8 @@ class Carrito(models.Model):
     
 class Compras(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.IntegerField()
+    direccion = models.CharField(max_length=50)
+    contacto = models.CharField(max_length=50)
 
     def __str__(self):
         return self.cliente.usuario

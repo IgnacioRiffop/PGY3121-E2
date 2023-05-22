@@ -46,11 +46,11 @@ class TSuscripcionAdmin(admin.ModelAdmin):
     list_editable = ['precio']
 
 class CompraAdmin(admin.ModelAdmin):
-    list_display = ['cliente','producto','cantidad']
+    list_display = ['cliente','direccion','contacto']
     #search_fields = ['cliente']
     list_per_page = 10
     list_filter = ['cliente']
-    list_editable = ['producto','cantidad']
+    list_editable = ['direccion','contacto']
 
 admin.site.register(TipoProducto,TProductoAdmin)
 admin.site.register(Producto,ProductoAdmin)

@@ -35,3 +35,11 @@ class CarritoForm (ModelForm):
     class Meta:
         model = Carrito
         fields = ['cantidad']
+
+class envioForm (ModelForm):
+    direccion = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Ingrese Dirección"}))
+    contacto = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Ingrese Contacto"}))
+
+    class Meta:
+        model = Compras
+        fields = ['direccion','contacto']
