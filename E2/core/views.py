@@ -68,8 +68,31 @@ def carrito(request):
     cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
     CarritoCliente = Carrito.objects.filter(cliente=cliente)
 
+    #Subtotal Carrito
+    subtotal = sum(carrito.producto.precio*carrito.cantidad for carrito in CarritoCliente)
+
+    # Descuento Suscripcion
+    try:
+        suscripcionCliente = Suscripcion.objects.get(cliente=cliente)
+    except Suscripcion.DoesNotExist:
+        suscripcionCliente = None
+    if suscripcionCliente != None:
+        descuento = round(subtotal*0.05)
+    else:
+        descuento = 0
+
+    #Envio
+    envio = 3000
+
+    #Total
+    total = subtotal-descuento+envio
+
     data = {
-        'listado': CarritoCliente
+        'listado': CarritoCliente,
+        'subtotal': subtotal,
+        'descuento': descuento,
+        'envio': envio,
+        'total': total
     }
 
     return render(request, 'core/carrito.html', data)
