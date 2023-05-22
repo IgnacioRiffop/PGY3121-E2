@@ -16,16 +16,16 @@
             <div class="row perfil">
                 <div class="col-sm-12 bg-white p-5 rounded-4 text-dark shadow">
                     <h5>Comprobante de pago</h5>
-                    <h6>Dirección: Avenida Las Nieves Oriente, 2196, Puente Alto. Metropolitana De Santiago.</h6>
-                    <h6>Telefono: 967384629</h6>
+                    <h6>Dirección: {{direccion}}</h6>
+                    <h6>Telefono: {{contacto}}</h6>
 
                     <h6>Subtotal: ${{subtotal}}</h6>
                     <h6>Descuento: ${{descuento}}</h6>
                     <h6>Envio: ${{envio}}</h6>
                     <h6>Total: ${{total}}</h6>
                     <h6>Medio de pago: WebPay</h6>
-                    <h6>Fecha: 10/04/2023 22:05:47</h6>
-                    <a href="cuenta.html" class="btn btn-verde mt-1">Siguiente</a>
+                    <h6>Fecha: {{fecha}}</h6>
+                    <a href="{% url 'carrito' %}" class="btn btn-verde mt-1">Siguiente</a>
                 </div>
             </div>
             <div class="col-sm-12">

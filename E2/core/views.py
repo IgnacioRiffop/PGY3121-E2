@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.core.paginator import Paginator
+import datetime
 # Create your views here.
 
 ## VIEWS - URLS - HTML
@@ -267,6 +268,15 @@ def voucher(request):
         'envio': envio,
         'total': total
     }
+    
+    if request.method == 'POST':
+        formulario = envioForm(request.POST, files=request.FILES) # OBTIENE LA DATA DEL FORMULARIO
+        if formulario.is_valid():
+            data['direccion'] = formulario.data["direccion"]
+            data['contacto'] = formulario.data["contacto"] 
+            current_datetime = datetime.datetime.now()  
+            data['fecha'] = current_datetime
+
     CarritoCliente.delete()
     return render(request, 'core/voucher.html', data)
 

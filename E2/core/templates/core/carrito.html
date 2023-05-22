@@ -16,16 +16,18 @@
         <div class="col-sm-5">
             <div class="row perfil">
                 <div class="col-sm-12 bg-white p-5 rounded-4 text-dark shadow">
-                    <h5>Hola, Ignacio</h5>
-                    <p>Ingresa los datos para completar tu compra.</p>
-                    {% csrf_token %}
-                    {{ form | crispy }}
-                    <br>
-                    <h6>Subtotal: ${{subtotal}}</h6>
-                    <h6>Descuento: ${{descuento}}</h6>
-                    <h6>Envio: ${{envio}}</h6>
-                    <h6>Total: ${{total}}</h6>
-                    <a href="{% url 'voucher' %}" class="btn btn-verde">Pagar</a>
+                    <form action="{% url 'voucher' %}" method="POST">
+                        <h5>Hola, Ignacio</h5>
+                        <p>Ingresa los datos para completar tu compra.</p>
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <br>
+                        <h6>Subtotal: ${{subtotal}}</h6>
+                        <h6>Descuento: ${{descuento}}</h6>
+                        <h6>Envio: ${{envio}}</h6>
+                        <h6>Total: ${{total}}</h6>
+                        <input type="submit" class="btn btn-verde" value="Pagar">
+                    </form>
                 </div>
             </div>
             <div class="col-sm-12">
