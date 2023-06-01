@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'colorfield',
     'crispy_forms',
+    'rest_framework',
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'

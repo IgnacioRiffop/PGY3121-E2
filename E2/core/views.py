@@ -4,7 +4,19 @@ from .forms import *
 from django.contrib import messages
 from django.core.paginator import Paginator
 import datetime
+from .serializers import *
+from rest_framework import viewsets
+import requests
 # Create your views here.
+
+# NOS PERMITE MOSTRAR LA INFO
+class ProductoViewset(viewsets.ModelViewSet):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+
+class TipoProductoViewset(viewsets.ModelViewSet):
+    queryset = TipoProducto.objects.all()
+    serializer_class = TipoProductoSerializer
 
 ## VIEWS - URLS - HTML
 
@@ -23,6 +35,34 @@ def index(request):
         'paginator': paginator
     }
     return render(request, 'core/index.html', data)
+
+
+def indexApi(request):
+    #OBTIENE DATOS DEL API
+    respuesta = requests.get('http://127.0.0.1:8000/api/productos/') # SELECT * FROM producto
+    respuesta2 = requests.get('https://mindicador.cl/api')
+    respuesta3 = requests.get('https://rickandmortyapi.com/api/character')
+    #TRANSFORMAR EL JSON
+    productosAll = respuesta.json()
+    monedas = respuesta2.json()
+    envolvente = respuesta3.json()
+    personajes = envolvente['results']
+
+    page = request.GET.get('page', 1) # OBTENEMOS LA VARIABLE DE LA URL, SI NO EXISTE NADA DEVUELVE 1
+    
+    try:
+        paginator = Paginator(productosAll, 3)
+        productosAll = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {
+        'listado': productosAll,
+        'monedas': monedas,
+        'personajes': personajes,
+        'paginator': paginator
+    }
+    return render(request, 'core/indexApi.html', data)
 
 def indexSesion(request):
     return render(request, ('core/indexSesion.html'))

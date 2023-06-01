@@ -1,0 +1,101 @@
+{% extends 'core/base.html' %}
+{% load static%}
+
+{% block css %}
+  
+{% endblock %}
+
+<!-- INICIO CONTENIDO-->
+{% block contenido %}
+
+<!-- Bienvenido -->
+<div class="container-fluid suscribir fondo d-flex flex-column justify-content-center align-items-center">
+  <div class="text-center text-white">
+    {% if user.is_authenticated %}
+
+    <h1 class="display-1">
+      Bienvenid@! {{ user.username }}
+    </h1>
+    {% else %}
+    <h1 class="display-1">
+      Bienvenid@!
+    </h1>
+    {% endif %}
+
+    <div>Todas las compras y suscripciones seran destinadas a una fundación sin fines de lucro.</div>
+    <div>USD: {{ monedas.dolar.valor}}</div>
+  </div>
+</div>
+<!-- Fin Bienvenido -->
+
+<!-- Suscripcion -->
+<section class="py-2 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">¿Quieres Suscribirte?</h1>
+      <p class="lead text-muted">Crea tu cuenta o inicia Sesión para iniciar una suscripción.
+        Ademas obten un 5% de descuento en el total de tu compra!
+      </p>
+      <p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'miSuscripcion' %}" class="btn btn-verde my-1">Suscribirse</a>
+        {% else %}
+        <a href="{% url 'registro' %}" class="btn btn-verde my-1">Registrarse</a>
+        <a href="{% url 'login' %}" class="btn btn-secondary my-2">Iniciar Sesión</a>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+</section>
+<!-- Fin Suscripcion -->
+
+<!-- Tienda -->
+<div class="album py-1 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for prod in listado %}
+        {% if prod.stock > 0 %}
+          <div class="col">
+            <div class="card shadow-sm">
+              {% if prod.imagen %}
+              <img src="{{ prod.imagen }}" class="responsive" width="100%" height="225">
+              {% else %}
+              <img src="{% static 'core/img/dog_light_icon.png' %}" class="responsive" width="100%" height="225">
+              {% endif %}
+              <div class="card-body">
+                <p class="card-text">{{ prod.nombre }}</p>
+                <p class="card-text fw-bold">${{ prod.precio }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    {% if user.is_authenticated %}
+                      <a href="{% url 'producto' prod.id %}" class="btn btn-verde">Ver Más</a>
+                    {% else %}
+                      <a href="{% url 'producto' prod.id %}" class="btn btn-verde">Ver Más</a>
+                    {% endif %}
+
+                  </div>
+                  <small class="text-muted">Stock: {{ prod.stock }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <br>
+    {% include 'core/paginator.html' %}
+
+    {% for aux in personajes %}
+      <div>{{aux.name}}</div>
+    {% endfor %}
+  </div>
+</div>
+<!-- Fin Tienda-->
+
+
+{% endblock %}
+<!-- FIN CONTENIDO -->
+{% block js %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{% static 'core/js/mensajeProducto.js' %}"></script>
+{% endblock %}
