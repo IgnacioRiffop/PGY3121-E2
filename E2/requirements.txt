@@ -3,3 +3,5 @@ django-admin-interface
 django-crispy-forms
 pillow
 django-rest-framework
+django-paypal
+paypal-checkout-serversdk

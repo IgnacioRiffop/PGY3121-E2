@@ -109,6 +109,8 @@ def carrito(request):
     cliente = Cliente.objects.filter(usuario=request.user.username)[:1]
     CarritoCliente = Carrito.objects.filter(cliente=cliente)
     existe = CarritoCliente.exists()
+    respuesta = requests.get('https://mindicador.cl/api/dolar').json()
+    valor_usd = respuesta['serie'][0]['valor']
 
     #Subtotal Carrito
     subtotal = sum(carrito.producto.precio*carrito.cantidad for carrito in CarritoCliente)
@@ -124,13 +126,16 @@ def carrito(request):
         descuento = 0
 
     #Envio
-    envio = 3000
+    envio = 1000
 
     #Total
     total = subtotal-descuento+envio
+    total_usd = round(total/valor_usd, 2)
 
     data = {
         'listado': CarritoCliente,
+        'valorusd': valor_usd,
+        'totalusd': total_usd,
         'subtotal': subtotal,
         'descuento': descuento,
         'envio': envio,

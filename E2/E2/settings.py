@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'colorfield',
     'crispy_forms',
     'rest_framework',
+    'paypalcheckoutsdk',
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
