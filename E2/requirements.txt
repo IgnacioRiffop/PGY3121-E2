@@ -5,3 +5,6 @@ pillow
 django-rest-framework
 django-paypal
 paypal-checkout-serversdk
+pymysql
+mysqlclient
+django-jazzmin
